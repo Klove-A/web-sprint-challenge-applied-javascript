@@ -30,7 +30,9 @@ const Header = (title, date, temp) => {
 
   return header
 }
-const newHeader = header 
+
+
+
 const headerAppender = (selector) => {
   // TASK 2
   // ---------------------
@@ -38,7 +40,9 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
-  selector.appendChild(header)
+  const newHeader = Header("stuff", "1/2/21", "89")
+  const sel = document.querySelector(selector)
+  sel.appendChild(newHeader)
 }
-headerAppender(".header")
+headerAppender(".header-container")
 export { Header, headerAppender }
