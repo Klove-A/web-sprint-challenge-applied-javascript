@@ -15,10 +15,11 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
+  console.log(typeof topics)
+  console.log(topics)
   const divTopics = document.createElement("div");
   divTopics.classList.add("topics");
-  const top = topics;
-  top.forEach(elem => {
+  Array.prototype.forEach.call(topics, elem => {
     const tab = document.createElement("div");
     tab.classList.add("tab");
     tab.textContent = elem;
@@ -36,16 +37,17 @@ const tabsAppender = (selector) => {
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
   const sel = document.querySelector(selector)
-  const newTabs = Tabs()
   axios.get("http://localhost:5000/api/topics")
-  .then(res => res.data)
-  .then(newTabs)
-  .then(sel.appendChild(newTabs))
+  .then(({data}) => data)
+  .then(({topics}) => topics)
+  // .then(res => {console.log(res); return res;})
+  .then(res => Tabs(res))
+  .then(topics => sel.appendChild(topics))
   .catch(err => {
     console.log(err)
   })
-  console.log(axios)
-  sel.appendChild(newTabs)
+  // console.log(axios)
+  // sel.appendChild(newTabs)
 }
 
 export { Tabs, tabsAppender }
