@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -37,9 +39,9 @@ const Card = (article) => {
   card.appendChild(author);
   author.appendChild(imgCon);
   imgCon.appendChild(img);
-  author.appendChild(span)
+  author.appendChild(span);
 
-  return card
+  return card;
 }
 
 const cardAppender = (selector) => {
@@ -51,6 +53,20 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+  const sel = document.querySelector(selector);
+  const axi = axios.get("http://localhost:5000/api/articles")
+  .then(res => res.data)
+  .then(axi.forEach(data => {
+    sel.appendChild(Card)
+  }))
+  // .then(({data}) => data)
+  // .then(({article}) => article)
+  // .then(res => Card(res))
+  // .then(article => sel.appendChild(article))
+  .catch(err => {
+    console.log(err)
+  })
+  console.log(card)
 }
 
 export { Card, cardAppender }
