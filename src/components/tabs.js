@@ -15,8 +15,6 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
-  console.log(typeof topics)
-  console.log(topics)
   const divTopics = document.createElement("div");
   divTopics.classList.add("topics");
   Array.prototype.forEach.call(topics, elem => {
