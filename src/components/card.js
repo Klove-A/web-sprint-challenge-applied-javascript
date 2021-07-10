@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const Card = (article) => {
+  console.log(article)
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -56,17 +57,19 @@ const cardAppender = (selector) => {
   const sel = document.querySelector(selector);
   const axi = axios.get("http://localhost:5000/api/articles")
   .then(res => res.data)
-  .then(axi.forEach(data => {
-    sel.appendChild(Card)
+  .then(data => data.articles)
+  .then(data => {
+    const obj = Object.values(data)
+    return obj
+  })
+  .then(arrayOfArrays => arrayOfArrays.forEach(arrayOfObjects => {
+    arrayOfObjects.forEach(obj => sel.appendChild(Card(obj)))
+    // sel.appendChild(Card(arrayOfObjects))
   }))
-  // .then(({data}) => data)
-  // .then(({article}) => article)
-  // .then(res => Card(res))
-  // .then(article => sel.appendChild(article))
   .catch(err => {
     console.log(err)
   })
-  console.log(card)
+  
 }
 
 export { Card, cardAppender }
